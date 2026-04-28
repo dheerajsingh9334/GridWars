@@ -17,6 +17,9 @@ export function useGrid() {
         res.data.forEach((t) => map.set(tileKey(t.x, t.y), t));
         setTiles(map);
       })
+      .catch((err) => {
+        console.error('Failed to load tiles:', err);
+      })
       .finally(() => setLoading(false));
   }, []);
 

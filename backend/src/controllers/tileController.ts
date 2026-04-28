@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { Server as SocketServer } from 'socket.io';
 import Tile from '../models/Tile';
 import TileHistory from '../models/TileHistory';
@@ -11,7 +11,7 @@ export const setIo = (socketIo: SocketServer): void => {
   io = socketIo;
 };
 
-export const getAllTiles = async (_req: AuthRequest, res: Response): Promise<void> => {
+export const getAllTiles = async (_req: Request, res: Response): Promise<void> => {
   try {
     const tiles = await Tile.find({}).lean();
     res.json(tiles.map((t) => ({

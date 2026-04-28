@@ -4,7 +4,7 @@ import { authMiddleware } from '../middleware/auth';
 
 const router = Router();
 
-router.get('/', authMiddleware, getAllTiles);
+router.get('/', getAllTiles);
 router.post('/claim', authMiddleware, claimTile);
 router.post('/erase', authMiddleware, eraseTile);
 

@@ -48,3 +48,5 @@ pids/
 .cache/
 .parcel-cache/
 .turbo/
+backend/.env
+frontend/.env

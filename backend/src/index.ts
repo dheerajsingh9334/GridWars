@@ -16,9 +16,15 @@ const server = http.createServer(app);
 
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
+// Allow both local and deployed frontends
+const allowedOrigins: string[] = [
+  "http://localhost:5173",
+  "https://grid-wars-phi.vercel.app",
+].concat(CLIENT_URL ? [CLIENT_URL] : []);
+
 const io = new SocketServer(server, {
   cors: {
-    origin: CLIENT_URL,
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -29,7 +35,7 @@ setIo(io);
 initSocket(io);
 
 // Middleware
-app.use(cors({ origin: CLIENT_URL, credentials: true }));
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 

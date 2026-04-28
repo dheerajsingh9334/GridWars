@@ -1,0 +1,50 @@
+# Environment variables (DO NOT COMMIT)
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Compiled JavaScript
+*.js
+*.jsx
+!*.config.js
+
+# Type checking
+.tsbuildinfo
+
+# Runtime data
+pids/
+*.pid
+*.seed
+
+# Misc
+.cache/
+.parcel-cache/
+.turbo/

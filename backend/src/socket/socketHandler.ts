@@ -6,9 +6,12 @@ let onlineCount = 0;
 
 export const initSocket = (io: SocketServer): void => {
   io.use((socket, next) => {
-    const token = (socket.request as Request).cookies?.gw_token as
-      | string
-      | undefined;
+    const rawCookies = socket.request.headers.cookie;
+    let token: string | undefined;
+    if (rawCookies) {
+      const match = rawCookies.match(/(?:^|;\\s*)gw_token=([^;]*)/);
+      if (match) token = match[1];
+    }
     if (!token) {
       // Allow unauthenticated connections for online count
       return next();

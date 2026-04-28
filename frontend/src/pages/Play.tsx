@@ -77,6 +77,7 @@ const Play = () => {
 
     if (tool === 'erase') {
       if (!existing) return;
+      
       if (existing.player_id !== player.id) {
         toast.error("You can only erase tiles you've claimed.");
         return;
@@ -97,7 +98,11 @@ const Play = () => {
     const k = `${x}:${y}`;
     if (dragPaintedRef.current.has(k)) return;
     dragPaintedRef.current.add(k);
-    void doClaim(x, y, false);
+    if (tool === 'erase') {
+      void handleAction(x, y); // reuse action which verifies ownership and optimistic removes
+    } else {
+      void doClaim(x, y, false);
+    }
   };
 
   useEffect(() => {
@@ -166,7 +171,7 @@ const Play = () => {
                 {tool === 'brush'
                   ? 'click + drag to paint · live sync'
                   : tool === 'erase'
-                  ? 'click your tiles to erase'
+                  ? 'click + drag to erase'
                   : tool === 'pick'
                   ? 'click any tile to sample its color'
                   : 'click to capture · updates broadcast live'}

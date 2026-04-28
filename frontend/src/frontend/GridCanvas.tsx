@@ -72,16 +72,16 @@ function GridCanvasImpl({
               aria-label={`Tile ${x},${y}${tile ? ` owned by ${tile.player_name}` : ' unclaimed'}`}
               onMouseEnter={() => {
                 onHover(tile ?? null, x, y);
-                if (isDragging && tool === 'brush') onDragPaint(x, y);
+                if (isDragging && (tool === 'brush' || tool === 'erase')) onDragPaint(x, y);
               }}
               onMouseDown={() => {
-                if (tool === 'brush') {
+                if (tool === 'brush' || tool === 'erase') {
                   setIsDragging(true);
                   onDragPaint(x, y);
                 }
               }}
               onClick={() => {
-                if (tool !== 'brush') onAction(x, y);
+                if (tool !== 'brush' && tool !== 'erase') onAction(x, y);
               }}
               className={[
                 'group relative aspect-square rounded-[3px] transition-all duration-200 ease-out',
